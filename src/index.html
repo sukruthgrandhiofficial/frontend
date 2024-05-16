@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NI Tech Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/88c0d5bcea.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div id="main">
+    
+    <div class="container">
+        <h1 style="display: inline-block;margin-left: 140px;margin-right: 140px">Welcome to the Items Page</h1>
+        <button type="button" id="loginContianerBtn" style="display: inline-block;align-items: end;">Login</button>
+    </div>
+    
+    <!-- <h1>Welcome to the Items Page</h1> -->
+    <!-- <button type="button" id="loginBtn" style="display: inline-block;"> Login Button</button> -->
+
+    <div class="container">
+        <!-- Button to trigger greet() function -->
+        <button id="sayHelloButton" onclick="greet()">Say Hello</button>
+        <!-- Display area for response data -->
+        <input type="text" id="responseData">
+    </div>
+
+    <div class="container">
+        <h2>Item Tracker</h2>
+        <form id="addItemForm">
+            <input type="text" id="itemName" placeholder="Enter item...">
+            <input type="text" id="itemDescription" placeholder="Enter Description...">
+            <button type="button" id="addItemBtn" >Add Item</button>
+        </form>
+        <table id="itemList">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+    <div class="LoginContainer" id="LoginContainer">
+        <div class="form-box">
+            <div class="signup">Sign In</div>
+            <div class="underline"></div>
+            <form>
+              <div class="input-group">
+                <div class="input-field namefield">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" placeholder="Name" id="name">
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" placeholder="Email" id="email">
+                </div>
+
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Password" id="password">
+                </div>
+              </div>
+              <div class="btn-field">
+                <button type="button" class = "disable signInBtn">Sign in</button>
+                <button type="button" class="signUpBtn">Sign up</button>
+
+              </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="loginscript.js"></script>
+</body>
+</html>
