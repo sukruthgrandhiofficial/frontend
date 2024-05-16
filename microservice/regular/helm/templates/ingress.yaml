@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/app-root: /frontend/
     cert-manager.io/cluster-issuer: lets-encrypt
-   namespace: "{{ .Values.namespace }}"
+  namespace: "{{ .Values.namespace }}"
 spec:
   tls:
     - hosts:
