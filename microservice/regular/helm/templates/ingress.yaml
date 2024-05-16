@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: frontend-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/app-root: /frontend/
     cert-manager.io/cluster-issuer: lets-encrypt
   namespace: "{{ .Values.namespace }}"
 spec:
@@ -25,5 +23,5 @@ spec:
               port:
                 number: 80
           path: /
-          pathType: Prefix
+          pathType: Exact
     {{- end }}
