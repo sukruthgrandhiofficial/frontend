@@ -1,0 +1,58 @@
+name: Frontend docker publish
+
+on:
+  push:
+    branches:
+      - main
+      - release/*
+    paths-ignore:
+      - 'version.txt'
+      - 'helm/values.yaml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Frontend Publish
+    runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Read Version Number
+        id: read-version
+        run: |
+          VERSION=$(cat version.txt)  # Read version from file
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT  # Add to environment variables
+            
+      - name: Bump release version
+        id: bump_version
+        uses: christian-draeger/increment-semantic-version@1.0.3
+        with:
+          current-version: "${{ steps.read-version.outputs.VERSION }}"
+          version-fragment: 'bug'
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          docker build  -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend-image:${{ steps.bump_version.outputs.next-version }} .
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend-image:${{ steps.bump_version.outputs.next-version }}
+
+      - name: Commit Updated Version
+        run: |
+          echo "${{ steps.bump_version.outputs.next-version }}"
+          echo ${{ steps.bump_version.outputs.next-version }}
+          echo "${{ steps.bump_version.outputs.next-version }}" > version.txt
+          sed -i "s/tag: \".*\"/tag: \"${{ steps.bump_version.outputs.next-version }}\"/" microservice/regular/helm/values.yaml
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
