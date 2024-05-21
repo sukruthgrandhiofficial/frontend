@@ -19,14 +19,20 @@ jobs:
       # added or changed files to the repository.
       contents: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
       - name: Read Version Number
         id: read-version
         run: |
-          VERSION=$(cat version.txt)  # Read version from file
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT  # Add to environment variables
+          echo "Hello"
+
+      # - name: Checkout repository
+      #   uses: actions/checkout@v3
+
+      # - name: Read Version Number
+      #   id: read-version
+      #   run: |
+      #     VERSION=$(cat version.txt)  # Read version from file
+      #     echo "VERSION=$VERSION" >> $GITHUB_OUTPUT  # Add to environment variables
             
       # - name: Bump release version
       #   id: bump_version
