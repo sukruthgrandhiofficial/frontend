@@ -7,7 +7,7 @@ on:
       - release/*
     paths-ignore:
       - 'version.txt'
-      - 'helm/values.yaml'
+      - 'microservice/regular/helm/values.yaml'
   workflow_dispatch:
 
 jobs:
